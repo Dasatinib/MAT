@@ -17,10 +17,9 @@ import datetime
 
 #Dataframe
 
-##filename = input("Enter the name of the file (without extension .csv)")
+filename = input("Enter the name of the file (without extension .csv)")
 
-##IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
-IMS=pd.read_csv("Example one INN.csv", thousands=',', parse_dates=["Month"])
+IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
 
 
 # In[3]:
