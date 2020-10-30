@@ -1,0 +1,17 @@
+import pandas as pd
+import numpy as np
+import calendar
+import datetime
+
+
+
+df=pd.read_csv("MAT PIVOT.csv")
+#df["US$ MNF"] = df["US$ MNF"].str.replace(',', '').str.replace('$', '')
+#df["US$ MNF"].fillna(0, inplace=True)
+#df["US$ MNF"] = df["US$ MNF"].astype(int)
+print(df.dtypes)
+is_nan=df.isnull()
+row_has_nan=is_nan.any(axis=1)
+rows_with_nan=df[row_has_nan]
+print(rows_with_nan)
+rows_with_nan.to_csv("NAN.csv")

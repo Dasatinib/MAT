@@ -17,9 +17,10 @@ import datetime
 
 #Dataframe
 
-filename = input("Enter the name of the file (without extension .csv)")
+##filename = input("Enter the name of the file (without extension .csv)")
 
-IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
+##IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
+IMS=pd.read_csv("Example one INN.csv", thousands=',', parse_dates=["Month"])
 
 
 # In[3]:
@@ -30,8 +31,8 @@ IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
 IMS["US$ MNF"] = IMS["US$ MNF"].str.replace(',', '').str.replace('$', '')
 #IMS["US$ MNF"] = IMS["US$ MNF"].str.replace('$', '') -> Possible to split the row above into two, one for replacing commas and the other one for replacing $
 
-IMS["US$ MNF"].fillna(0, inplace=True)
-#IMS["US$ MNF"] = IMS["US$ MNF"].fillna(0) -> Possible to use instead of inplace above
+##IMS["US$ MNF"].fillna(0, inplace=True)
+#IMS["US$ MNF"] = IMS["US$ MNF"].fillna("") -> Possible to use instead of inplace above
 
 
 # In[4]:
@@ -39,8 +40,7 @@ IMS["US$ MNF"].fillna(0, inplace=True)
 
 #Reading US$ MNF as numbers 2/2 (changing astype)
 
-IMS["US$ MNF"] = IMS["US$ MNF"].astype(int)
-
+IMS["US$ MNF"] = IMS["US$ MNF"].astype(float)
 
 # In[5]:
 
@@ -144,4 +144,3 @@ MAT_PIVOT=MAT_IMS.unstack("MAT Year")
 MAT_PIVOT.columns = [f'{i} {j}' for i, j in MAT_PIVOT.columns]
 
 MAT_PIVOT.to_csv("MAT PIVOT.csv")
-
