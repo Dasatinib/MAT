@@ -19,6 +19,8 @@ import datetime
 
 filename = input("Enter the name of the file (without extension .csv)")
 
+print("Reading base data and parsing months column")
+
 IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
 
 
@@ -26,6 +28,8 @@ IMS=pd.read_csv(filename+".csv", thousands=',', parse_dates=["Month"])
 
 
 #Reading US$ MNF as numbers 1/2 (changing thousands, removing dollar signs and filling in NAs)
+
+print("Removing $")
 
 IMS["US$ MNF"] = IMS["US$ MNF"].str.replace(',', '').str.replace('$', '')
 #IMS["US$ MNF"] = IMS["US$ MNF"].str.replace('$', '') -> Possible to split the row above into two, one for replacing commas and the other one for replacing $
@@ -38,6 +42,8 @@ IMS["US$ MNF"] = IMS["US$ MNF"].str.replace(',', '').str.replace('$', '')
 
 
 #Reading US$ MNF as numbers 2/2 (changing astype)
+
+print("Reading sales column as float")
 
 IMS["US$ MNF"] = IMS["US$ MNF"].astype(float)
 
@@ -137,9 +143,16 @@ MAT_IMS=MAT_IMS.groupby(columns).sum()
 
 # In[24]:
 
+print("Unstacking MAT Year column")
 
 MAT_PIVOT=MAT_IMS.unstack("MAT Year")
 
+print("Joining data column levels")
+
 MAT_PIVOT.columns = [f'{i} {j}' for i, j in MAT_PIVOT.columns]
 
+print("Printing :)")
+
 MAT_PIVOT.to_csv("MAT PIVOT.csv")
+
+print("Finished!")
